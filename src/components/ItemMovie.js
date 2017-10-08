@@ -5,15 +5,15 @@ import { Link } from 'react-router';
 
 class ItemMovie extends Component {
 
-    changeStars = (id, movieId)=> { this.props.changeStars(id, movieId) }
+    handleSubmit = (currentMovie, id, event) => {this.props.handleSubmit(currentMovie, id, event)}
 
     render() {
 
         return (
             <div className="movie-item">
                 <div className="likes">
-                    <img onClick={this.props.likeUp.bind(this,  this.props.currentMovie.id)} className="likes-img" src={likeImg.like} alt="likeUp"/>
-                    <img onClick={this.props.likeDown.bind(this,  this.props.currentMovie.id)} className="likes-img" src={likeImg.dislike} alt="likeDown"/>
+                    <img onClick={this.props.handleSubmit.bind(this, this.props.currentMovie, this.props.currentMovie.id)} className="likes-img" src={likeImg.like} alt="likeUp"/>
+                    <img onClick={this.props.handleSubmit.bind(this, this.props.currentMovie, this.props.currentMovie.id)} className="likes-img" src={likeImg.dislike} alt="likeDown"/>
                     likes
                 </div>
                 
@@ -26,7 +26,12 @@ class ItemMovie extends Component {
                 </div>
                 <div className="count-likes">{this.props.likes}</div>
                 <div className="stars">
-                    <Stars changeStars={this.props.changeStars} stars={this.props.stars} id={this.props.id} />
+                    <Stars 
+                        handleSubmit={this.props.handleSubmit} 
+                        currentMovie={this.props.currentMovie} 
+                        stars={this.props.stars} 
+                        id={this.props.id} 
+                    />
                 </div>
             </div>
         );

@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import './App.css';
 import ItemMovie from './ItemMovie.js';
 import Description from './Description.js';
-import { fetchMovies, sortMovieByLikes, sortMovieByRating, search, likeUp, likeDown, changeStars, changeButtonBGColor } from '../Features/MainPage/MainPageActions';
-import { getData, getMovieByLikes, getMovieByRating, getFlagSearch, getMovies, getInitialMovies, getLike, getStars, getButtonBGColor } from '../Features/MainPage/MainPageReducer';
+import { deleteMovie, updateMovie, fetchMovies, sortMovieByLikes, sortMovieByRating, search, changeButtonBGColor } from '../Features/MainPage/MainPageActions';
+import { getisFetching, getMovies, getData, getMovieByLikes, getMovieByRating, getFlagSearch, getButtonBGColor } from '../Features/MainPage/MainPageReducer';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
@@ -19,19 +19,28 @@ class Movies extends Component {
 
     search(event) { this.props.search(event.target.value) }
 
-    likeUp = (id) => { this.props.likeUp(id) }
-
-    likeDown = (id) => { this.props.likeDown(id) }
-
-    changeStars = (id, movieId) => { this.props.changeStars(id, movieId) }
-
     changeButtonBGColor = (flagButtonBGColor) => { this.props.changeButtonBGColor(flagButtonBGColor) }
 
+    handleSubmit = (currentMovie, id, event) => {
+        let data
+        if (event.target.alt === 'likeUp') {
+            data = {...currentMovie, likes: currentMovie.likes + 1};
+        } else if (event.target.alt === 'likeDown') {
+             data = {...currentMovie, likes: currentMovie.likes - 1};
+        }
+        if (event.target.tagName === 'I') {
+            data = {...currentMovie, stars: parseInt(event.target.id, 10)};
+        }
+        return this.props.updateMovie(data, id);
+    }
+
+    deleteMovie = (id) => {
+        this.props.deleteMovie(id);
+    }
+
     render() {
-        console.log(this.props.data);
-        const { data } = this.props;
-        console.log(data);
-        const activeMovie = (this.props.movies.filter((el) => el.id === parseInt(this.props.params.id, 10))[0]) || this.props.initialMovies[0];
+        const { movies } = this.props;
+        const activeMovie = (movies.filter((el) => el.id === parseInt(this.props.params.id, 10))[0]) || this.props.data[0];
         return (
             <div className="movies">
                 <div className="movies-header">
@@ -58,27 +67,32 @@ class Movies extends Component {
                             <input onChange={this.search.bind(this)} className="search" type="search" /> 
                         </div>
                     </div>
-                    {this.props.movies.map((movie) => {
+                    {movies.map((movie) => {
                         return (<ItemMovie 
                                     key={movie.id}
                                     id={movie.id}
                                     likes={movie.likes}
                                     stars={movie.stars}
                                     currentMovie={movie} 
-                                    likeUp={this.likeUp}
-                                    likeDown={this.likeDown}
-                                    changeStars={this.changeStars}
+                                    handleSubmit={this.handleSubmit}
+
                                 /> );
                     })}
                 </div>
-                <Description
-                    key={this.props.initialMovies.id} 
+                {
+                    this.props.isFetching
+                    ? "Loading ..."
+                    : <Description
+                    key={activeMovie.id} 
                     activeMovie={activeMovie}
                     stars={activeMovie.stars}
                     id={activeMovie.id}
                     flagButtonBGColor={this.props.flagButtonBGColor}
-                    changeStars={this.changeStars} 
+                    handleSubmit={this.handleSubmit}
+                    deleteMovie={this.deleteMovie}
                 />
+                }
+                
             </div>
         )
     }
@@ -88,12 +102,10 @@ const mapStateToProps = state => ({
     sortByLikes: getMovieByLikes(state),
     sortByRating: getMovieByRating(state),
     flagSearch: getFlagSearch(state),
-    movies: getMovies(state),
-    initialMovies: getInitialMovies(state),
-    flagLike: getLike(state),
-    flagStars: getStars(state),
     flagButtonBGColor: getButtonBGColor(state),
+    movies: getMovies(state),
     data: getData(state),
+    isFetching: getisFetching(state)
 });
 
 const mapDispatchToProps = {
@@ -101,10 +113,9 @@ const mapDispatchToProps = {
     sortMovieByLikes: (sortByLikes) => sortMovieByLikes(sortByLikes),
     sortMovieByRating: (sortByRating) => sortMovieByRating(sortByRating),
     search: (flagSearch) => search(flagSearch),
-    likeUp: (id) => likeUp(id),
-    likeDown: (id) => likeDown(id),
-    changeStars: (id, movieId) => changeStars(id, movieId),
-    changeButtonBGColor: (flagButtonBGColor) => changeButtonBGColor(flagButtonBGColor)
+    changeButtonBGColor: (flagButtonBGColor) => changeButtonBGColor(flagButtonBGColor),
+    updateMovie: (data, id) => updateMovie(data, id),
+    deleteMovie: (id) => deleteMovie(id)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movies);

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 export default class CreateMovie extends Component {
   render() {
+    console.log(this)
     return (
       <div>
         <form>
