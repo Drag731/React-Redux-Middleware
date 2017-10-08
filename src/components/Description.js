@@ -19,7 +19,7 @@ class Description extends Component {
                         id={this.props.id} 
                     />
                     <div className="description-control-buttons">
-                        <Link to={'/createMovie'}>
+                        <Link to={'/editMovie'}>
                             <button style={{background: 'green', display: this.props.flagButtonBGColor ? 'inline-block' : 'none'}}>EDIT</button>
                         </Link>
                         <button onClick={this.props.deleteMovie.bind(this, this.props.id)} style={{background: 'green', display: this.props.flagButtonBGColor ? 'inline-block' : 'none'}}>DELETE</button>

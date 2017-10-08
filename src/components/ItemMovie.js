@@ -18,7 +18,7 @@ class ItemMovie extends Component {
                 </div>
                 
                 <div className="poster">
-                    <h3 className="movie-name">
+                    <h3 className="movie-name" onClick={this.props.selectMovie.bind(this, this.props.currentMovie.id)}>
                         <Link to={'/movies/' + this.props.currentMovie.id} className="movie-name-link">
                             {this.props.currentMovie.title}
                         </Link></h3>

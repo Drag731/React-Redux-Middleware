@@ -1,4 +1,4 @@
-import { DELETE_MOVIE, UPDATE_MOVIE, FIND_ALL, ADD_MOVIES, SEARCH_MOVIE, SORT_BY_LIKES, SORT_BY_RATING, CHANGE_BUTTON_BG_COLOR } from './MainPageActions';
+import { ADD_NEW_MOVIE, SELECT_MOVIE, DELETE_MOVIE, UPDATE_MOVIE, FIND_ALL, ADD_MOVIES, SEARCH_MOVIE, SORT_BY_LIKES, SORT_BY_RATING, CHANGE_BUTTON_BG_COLOR } from './MoviesActions';
 
 const initialState = {
     data: [],
@@ -7,6 +7,7 @@ const initialState = {
     sortByRating: 'on',
     flagButtonBGColor: true,
     flagSearch: '',
+    selectedMovieId: 1
 };
 
 const MoviesReducer = (state = initialState, action) => {
@@ -43,6 +44,13 @@ const MoviesReducer = (state = initialState, action) => {
                 ...state,
                 data: state.data.filter(movie => movie.id !== id)
             };
+        }
+
+        case ADD_NEW_MOVIE: {
+            return {
+                ...state,
+                data: [...state.data, action.payload]
+            }
         }
 
         case SORT_BY_LIKES: {
@@ -87,6 +95,13 @@ const MoviesReducer = (state = initialState, action) => {
             };
         }
 
+        case SELECT_MOVIE: {
+            return {
+                ...state,
+                selectedMovieId: action.payload,
+            };
+        }
+
         default: {
             return state;
         }
@@ -104,8 +119,8 @@ export const getFlagSearch = state => state.movies.flagSearch;
 export const getMovieByRating = state => state.movies.sortByRating;
 export const getButtonBGColor = state => state.movies.flagButtonBGColor;
 
-// export const getSelectedMovie = state => state.movies.data.find((movie) => {
-//     return movie.id === state.movies.selectedMovieId;
-// });
+export const getSelectedMovie = state => state.movies.data.find((movie) => {
+    return movie.id === state.movies.selectedMovieId;
+});
 
 export default MoviesReducer;

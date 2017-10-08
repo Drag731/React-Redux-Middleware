@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './App.css';
-import ItemMovie from './ItemMovie.js';
-import Description from './Description.js';
-import { deleteMovie, updateMovie, fetchMovies, sortMovieByLikes, sortMovieByRating, search, changeButtonBGColor, selectMovie } from '../Features/MainPage/MainPageActions';
-import { getisFetching, getMovies, getData, getMovieByLikes, getMovieByRating, getFlagSearch, getButtonBGColor, getSelectedMovie } from '../Features/MainPage/MainPageReducer';
+import ItemMovie from '../../components/ItemMovie.js';
+import Description from '../../components/Description.js';
+import { deleteMovie, updateMovie, fetchMovies, sortMovieByLikes, sortMovieByRating, search, changeButtonBGColor, selectMovie } from './MoviesActions';
+import { getisFetching, getMovies, getData, getMovieByLikes, getMovieByRating, getFlagSearch, getButtonBGColor } from './MoviesReducers';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 

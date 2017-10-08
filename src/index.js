@@ -5,12 +5,13 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import About from './components/About'
-import Home from './components/Home'
-import Movies from './components/Movies.js';
-import CreateMovie from './components/CreateMovie';
-import configureStore from './configure-store';
+import registerServiceWorker from './registerServiceWorker.js';
+import About from './Features/About/About.js'
+import Home from './Features/Home/Home.js'
+import Movies from './Features/Movies/Movies.js';
+import EditMovieForm from './Features/Form/EditMovieForm.js';
+import CreateMovieForm from './Features/Form/CreateMovieForm.js';
+import configureStore from './configure-store.js';
 
 const store = configureStore();
 
@@ -22,7 +23,8 @@ ReactDOM.render(
                         <IndexRoute component={Movies} />
                         <Route path='movies' component={Movies} />
                         <Route path='/movies/:id' component={Movies} />
-                        <Route path='createMovie' component={CreateMovie} />
+                        <Route path='editMovie' component={EditMovieForm} />
+                        <Route path='createMovie' component={CreateMovieForm} />
                         <Route path='home' component={Home} />
                         <Route path='about' component={About} />
 

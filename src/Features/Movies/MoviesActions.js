@@ -7,6 +7,9 @@ export const CHANGE_BUTTON_BG_COLOR = 'CHANGE_BUTTON_BG_COLOR';
 export const FIND_ALL = 'FIND_ALL';
 export const UPDATE_MOVIE = 'UPDATE_MOVIE';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
+export const SELECT_MOVIE = 'SELECT_MOVIE';
+export const ADD_NEW_MOVIE = 'ADD_NEW_MOVIE';
+
 
 export const fetchMovies = () => {
     return (dispatch) => {
@@ -49,6 +52,18 @@ const _deleteMovie = id => ({
   payload: id
 })
 
+export const addNewMovie = data => {
+  return (dispatch) => {
+    return axios.post(`http://localhost:3001/movies/`, data)
+      .then(response => dispatch(_addNewMoviee(data)))
+  }
+}
+
+const _addNewMoviee = payload => ({
+  type: ADD_NEW_MOVIE,
+  payload
+})
+
 export const sortMovieByLikes = (sortByLikes) => ({
     type: SORT_BY_LIKES,
     payload: sortByLikes
@@ -69,3 +84,7 @@ export const changeButtonBGColor = (flagButtonBGColor) => ({
     payload: flagButtonBGColor,
 });
 
+export const selectMovie = id => ({
+    type: SELECT_MOVIE,
+    payload: id
+});
