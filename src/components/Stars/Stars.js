@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './font-awesome.min.css';
 import './Stars.css'
 
@@ -46,3 +47,11 @@ class Stars extends Component {
 }
 
 export default Stars;
+
+
+Stars.propTypes = {
+    id: PropTypes.number,
+    stars: PropTypes.number,
+    currentMovie: PropTypes.object,
+    handlerOfLikesAndStars: PropTypes.func,
+}

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getUserRole } from './HeaderReducers';
 import { changeUserRole } from './HeaderActions';
+import PropTypes from 'prop-types';
 import './Header.css';
 
 class Header extends Component {
@@ -44,3 +45,8 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
+
+Header.propTypes = {
+    userRole: PropTypes.string,
+    changeUserRole: PropTypes.func
+}

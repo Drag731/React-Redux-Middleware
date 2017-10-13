@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types';
 
 class MainPageSortMovies extends Component {
 
@@ -25,3 +25,9 @@ class MainPageSortMovies extends Component {
 }
 
 export default MainPageSortMovies;
+
+MainPageSortMovies.propTypes = {
+    search: PropTypes.func,
+    sortMovieByLikes: PropTypes.func,
+    sortMovieByRating: PropTypes.func
+}

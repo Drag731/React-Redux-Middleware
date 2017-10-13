@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './MainPage.css';
 import ItemMovie from '../../components/ItemMovie/ItemMovie.js';
@@ -57,8 +58,6 @@ class MainPage extends Component {
                 <Description
                     key={activeMovie.id} 
                     handlerOfLikesAndStars={this.handlerOfLikesAndStars}
-                    stars={activeMovie.stars}
-                    id={activeMovie.id}
                 />    
             </div>
         )
@@ -83,3 +82,16 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+
+MainPage.propTypes = {
+    flagSearch: PropTypes.string,
+    movies: PropTypes.array,
+    data: PropTypes.array,
+    isFetching: PropTypes.bool,
+    fetchMovies: PropTypes.func,
+    sortMovieByLikes: PropTypes.func,
+    sortMovieByRating: PropTypes.func,
+    updateMovie: PropTypes.func,
+    deleteMovie: PropTypes.func,
+    selectMovie: PropTypes.func
+}

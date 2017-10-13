@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 
 export default class About extends Component {
     
     componentDidMount() {
         setTimeout(() =>
-            this.props.location.pathname === '/about' ? this.props.router.push('/') : false, 5000);
+            this.props.location.pathname === '/about' ? this.props.router.push('/movies') : false, 5000);
     }
 
   render() {
@@ -14,4 +15,13 @@ export default class About extends Component {
       </div>
     )
   }
+}
+
+ About.propTypes = {
+  location: PropTypes.shape({
+      pathname: PropTypes.string
+    }), 
+  router: PropTypes.shape({
+      push: PropTypes.func
+    })
 }

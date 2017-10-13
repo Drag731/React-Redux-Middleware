@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Stars from '../Stars/Stars.js';
 import likeImg from './likeImg.js';
 import { Link } from 'react-router';
+import PropTypes from 'prop-types';
 import './ItemMovie.css'
 
 class ItemMovie extends Component {
@@ -68,3 +69,11 @@ class ItemMovie extends Component {
 
 export default ItemMovie;
 
+ItemMovie.propTypes = {
+    id: PropTypes.number,
+    likes: PropTypes.number,
+    stars: PropTypes.number,
+    currentMovie: PropTypes.object,
+    handlerOfLikesAndStars: PropTypes.func,
+    selectMovie: PropTypes.func
+}

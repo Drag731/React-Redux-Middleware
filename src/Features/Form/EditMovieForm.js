@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { setFormData } from './FormActions'
 import { getFormData } from './FormReducers'
@@ -180,3 +181,19 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditMovieForm);
+
+EditMovieForm.propTypes = {
+    getData: PropTypes.array,
+    getSelectedMovie: PropTypes.object,
+    getisFetching: PropTypes.bool,
+    updateMovie: PropTypes.func,
+    setFormData: PropTypes.func,
+    getFormData: PropTypes.shape({
+        title: PropTypes.string,
+        posterUrl: PropTypes.string,
+        director: PropTypes.string,
+        actors: PropTypes.string,
+        genres: PropTypes.string,
+        description: PropTypes.string
+    })
+}

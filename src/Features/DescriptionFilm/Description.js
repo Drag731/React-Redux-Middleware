@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Stars from '../../components/Stars/Stars.js';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { getFormData } from '../Form/FormReducers'
 import { getUserRole } from '../Header/HeaderReducers';
 
 import { addNewMovie, deleteMovie, updateMovie } from '../MainPage/MainPageActions.js'
@@ -64,7 +64,6 @@ class Description extends Component {
 const mapStateToProps = state => ({
     movies: getFilteredMovies(state),
     userRole: getUserRole(state),
-    getFormData: getFormData(state),
     getSelectedMovie: getSelectedMovie(state),
 });
 
@@ -75,3 +74,11 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Description);
+
+Description.propTypes = {
+    movies: PropTypes.array,
+    userRole: PropTypes.string,
+    handlerOfLikesAndStars: PropTypes.func,
+    getSelectedMovie: PropTypes.object
+}
+
