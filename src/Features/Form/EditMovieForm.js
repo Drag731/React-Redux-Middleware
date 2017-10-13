@@ -72,7 +72,7 @@ class EditMovieForm extends Component {
                     <table>
                         <tbody>
                             <tr>
-                                <td><label for="title">Title</label></td>
+                                <td><label htmlFor="title">Title</label></td>
                                 <td>
                                     <input 
                                         className="form-input"
@@ -85,7 +85,7 @@ class EditMovieForm extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <td><label for="posterUrl">img url</label></td>
+                                <td><label htmlFor="posterUrl">img url</label></td>
                                 <td>
                                     <input 
                                         className="form-input"
@@ -98,7 +98,7 @@ class EditMovieForm extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <td><label for="director">Direction</label></td>
+                                <td><label htmlFor="director">Direction</label></td>
                                 <td>
                                     <input 
                                         className="form-input"
@@ -111,7 +111,7 @@ class EditMovieForm extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <td><label for="actors">Actors</label></td>
+                                <td><label htmlFor="actors">Actors</label></td>
                                 <td>
                                     <input 
                                         className="form-input"
@@ -124,7 +124,7 @@ class EditMovieForm extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <td><label for="genres">Genres</label></td>
+                                <td><label htmlFor="genres">Genres</label></td>
                                 <td>
                                     <input 
                                         className="form-input"
@@ -137,7 +137,7 @@ class EditMovieForm extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <td><label for="description">Description</label></td>
+                                <td><label htmlFor="description">Description</label></td>
                                 <td>
                                     <textarea
                                         className="form-input" 
