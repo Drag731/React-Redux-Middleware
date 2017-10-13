@@ -1,11 +1,11 @@
-import { ADD_NEW_MOVIE, SELECT_MOVIE, DELETE_MOVIE, UPDATE_MOVIE, FIND_ALL, ADD_MOVIES, SEARCH_MOVIE, SORT_BY_LIKES, SORT_BY_RATING, CHANGE_BUTTON_BG_COLOR } from './MoviesActions';
+import { ADD_NEW_MOVIE, SELECT_MOVIE, DELETE_MOVIE, 
+    UPDATE_MOVIE, FIND_ALL, ADD_MOVIES, SEARCH_MOVIE, 
+    SORT_BY_LIKES, SORT_BY_RATING } from './MainPageActions';
 
 const initialState = {
     data: [],
     isFetching: true,
-    sortByLikes: 'on',
-    sortByRating: 'on',
-    flagButtonBGColor: true,
+    sortBy: null,
     flagSearch: '',
     selectedMovieId: 1
 };
@@ -42,7 +42,8 @@ const MoviesReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                data: state.data.filter(movie => movie.id !== id)
+                data: state.data.filter(movie => movie.id !== id),
+                selectedMovieId: 1
             };
         }
 
@@ -56,28 +57,14 @@ const MoviesReducer = (state = initialState, action) => {
         case SORT_BY_LIKES: {
             return {
                 ...state,
-                data: state.data.sort(function(a,b) {
-                    if (action.payload === 'on') {
-                         return  a.likes - b.likes; 
-                    } else {
-                        return  a.likes + b.likes; 
-                    }
-                }),
-                sortByLikes: action.payload === 'on' ? 'off' : 'on',
+                sortBy: 'likes',
             };
         }
 
         case SORT_BY_RATING: {
             return {
                 ...state,
-                data: state.data.sort(function(a,b) {
-                    if (action.payload === 'on') {
-                        return  a.stars - b.stars; 
-                    } else {
-                        return  a.stars + b.stars;
-                    }
-                }),
-                sortByRating: action.payload === 'on' ? 'off' : 'on',
+                sortBy: 'rating',
             };
         }
 
@@ -85,13 +72,6 @@ const MoviesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 flagSearch: action.payload
-            };
-        }
-
-        case CHANGE_BUTTON_BG_COLOR: { 
-            return {
-                ...state,
-                flagButtonBGColor: !action.payload
             };
         }
 
@@ -110,14 +90,24 @@ const MoviesReducer = (state = initialState, action) => {
 
 export const getisFetching = state => state.movies.isFetching;
 export const getData = state => state.movies.data;
-export const getMovies = state => state.movies.data.filter(function(el) {
-                    const regExp = new RegExp(state.movies.flagSearch, 'i')
-                    return ~el.title.search(regExp);
-                });
-export const getMovieByLikes = state => state.movies.sortByLikes;
+
+export const getFilteredMovies = state => {
+    let filteredMovies = state.movies.data;
+    if ( state.movies.sortBy === 'likes') {
+        filteredMovies = [...state.movies.data].sort((a, b) => b.likes - a.likes);
+    }
+
+    if ( state.movies.sortBy === 'rating') {
+        filteredMovies = [...state.movies.data].sort((a, b) => b.stars - a.stars);
+    }
+
+   return filteredMovies.filter((el) => {
+        const regExp = new RegExp(state.movies.flagSearch, 'i');
+        return ~el.title.search(regExp);
+    });
+};
+
 export const getFlagSearch = state => state.movies.flagSearch;
-export const getMovieByRating = state => state.movies.sortByRating;
-export const getButtonBGColor = state => state.movies.flagButtonBGColor;
 
 export const getSelectedMovie = state => state.movies.data.find((movie) => {
     return movie.id === state.movies.selectedMovieId;

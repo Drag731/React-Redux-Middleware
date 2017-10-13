@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+}
+
+.movie-item {
+    width: 30%;
+    height: 300px;
+    float: left;
+    margin-right: 15px;
+    margin-top: 20px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px #ccc;
+    transition: all 0.2s ease-in-out;
+}
+
+.movie-item:hover {
+    -webkit-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    -o-transform: scale(1.03);
+    transform: scale(1.03);
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #3A2F28;
+}
+
+.likes, .count-likes {
+    display: inline-block;
+}
+
+.poster {
+    float: right;
+    width: 77%;
+}
+
+.movie-name {
+    font-size: 0.9em;
+    margin: 0;
+    padding: 0;
+}
+
+.movie-name-link {
+    text-decoration: none;
+    color: black;
+}
+
+.movie-name-link:hover {
+    color: #3A2F33;
+}
+
+.poster-img {
+    width: 100%;
+
+}
+
+.likes-img {
+    display: block;
+    margin: 5px 0 0 5px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.likes-img:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);;
+}
+

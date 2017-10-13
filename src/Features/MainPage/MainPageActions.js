@@ -3,7 +3,6 @@ export const ADD_MOVIES = 'ADD_MOVIES';
 export const SORT_BY_LIKES = 'SORT_BY_LIKES';
 export const SORT_BY_RATING = 'SORT_BY_RATING';
 export const SEARCH_MOVIE = 'SEARCH_MOVIE';
-export const CHANGE_BUTTON_BG_COLOR = 'CHANGE_BUTTON_BG_COLOR';
 export const FIND_ALL = 'FIND_ALL';
 export const UPDATE_MOVIE = 'UPDATE_MOVIE';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
@@ -41,47 +40,40 @@ const _updateMovie = payload => ({
 });
 
 export const deleteMovie = (id) => {
-  return (dispatch) => {
-    return axios.delete(`http://localhost:3001/movies/${id}`)
-      .then(response => dispatch(_deleteMovie(id)))
-  }
+    return (dispatch) => {
+        return axios.delete(`http://localhost:3001/movies/${id}`)
+            .then(response => dispatch(_deleteMovie(id)))
+    }
 }
 
 const _deleteMovie = id => ({
-  type: DELETE_MOVIE,
-  payload: id
+    type: DELETE_MOVIE,
+    payload: id
 })
 
 export const addNewMovie = data => {
-  return (dispatch) => {
-    return axios.post(`http://localhost:3001/movies/`, data)
-      .then(response => dispatch(_addNewMoviee(data)))
-  }
+    return (dispatch) => {
+        return axios.post(`http://localhost:3001/movies/`, data)
+            .then(response => dispatch(_addNewMoviee(data)))
+    }
 }
 
 const _addNewMoviee = payload => ({
-  type: ADD_NEW_MOVIE,
-  payload
+    type: ADD_NEW_MOVIE,
+    payload
 })
 
-export const sortMovieByLikes = (sortByLikes) => ({
+export const sortMovieByLikes = () => ({
     type: SORT_BY_LIKES,
-    payload: sortByLikes
 });
 
-export const sortMovieByRating = (sortByRating) => ({
+export const sortMovieByRating = () => ({
     type: SORT_BY_RATING,
-    payload: sortByRating
 });
 
 export const search = (flagSearch) => ({
     type: SEARCH_MOVIE,
     payload: flagSearch
-});
-
-export const changeButtonBGColor = (flagButtonBGColor) => ({
-    type: CHANGE_BUTTON_BG_COLOR,
-    payload: flagButtonBGColor,
 });
 
 export const selectMovie = id => ({

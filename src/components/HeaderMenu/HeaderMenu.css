@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+.active {
+    color: #61dafb;
+}
+
+.menu {
+    border: 2px solid black;
+    height: 64px;
+    line-height:  64px;
+    border-radius: 5px;
+}
+
+.logo-img {
+    float: left;
+    width: 90px;
+    height: 60px;
+}
+
+.listOfMenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item-list {
+    display: inline-block;
+    margin-right: 50px;
+}
+
+.item-link {
+    text-decoration: none;
+    color: black;
+    transition: all 0.2s ease-in-out;
+}
+
+.item-link:hover {
+    text-decoration: underline;
+    color: #61dafb;
+}
+
+.active {
+    color: #61dafb;
+}
+
+.fa {
+    cursor: pointer;
+}

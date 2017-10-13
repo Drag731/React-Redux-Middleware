@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import MoviesReducer from './Features/Movies/MoviesReducers.js';
+import MainPageReducer from './Features/MainPage/MainPageReducers.js';
+import HeaderReducer from './Features/Header/HeaderReducers.js';
 import { FormReducer } from './Features/Form/FormReducers.js'
 
 
 export default combineReducers({
-    movies: MoviesReducer,
-    form: FormReducer
+    movies: MainPageReducer,
+    form: FormReducer,
+    header: HeaderReducer
 });

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
 
+import './HeaderMenu.css'
+
 class HeaderMenu extends Component {
 
     render() {
-
         return (
             <div className='menu'>
                 <div className="logo-img">

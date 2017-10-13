@@ -16,8 +16,7 @@ export const FormReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_FORM_DATA: {
             return {
-                formData: { ...state.formData,
-                ...action.payload}
+                formData: { ...state.formData, ...action.payload}
             }
         }
 
