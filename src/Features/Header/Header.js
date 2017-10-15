@@ -3,7 +3,9 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getUserRole } from './HeaderReducers';
 import { changeUserRole } from './HeaderActions';
+import Button from '../../components/Button/Button.js';
 import PropTypes from 'prop-types';
+
 import './Header.css';
 
 class Header extends Component {
@@ -24,10 +26,7 @@ class Header extends Component {
                 </div>
                 <div className="create-movie">
                     <Link to={'/createMovie'}>
-                        <button style={{
-                            background: 'green',
-                            display: userRole === 'admin' ? 'inline-block' : 'none',
-                        }}>CREATE MOVIE</button>
+                        <Button userRole={userRole}>CREATE MOVIE</Button>
                     </Link>
                 </div>
                 <h2 className="movies-header-name">Movies</h2>

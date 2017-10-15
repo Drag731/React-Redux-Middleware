@@ -40,19 +40,15 @@ class ItemMovie extends Component {
                     likes
                 </div>
                 
-                <div className="poster">
-                    <h3 
-                        className="movie-name" 
-                        onClick={selectMovie.bind(this, currentMovie.id)}>
-                        <Link to={'/movies/' + currentMovie.id} className="movie-name-link">
-                            {this.props.currentMovie.title}
-                        </Link>
-                    </h3>
-                    <img 
-                        className="poster-img" 
-                        src={currentMovie.posterUrl} 
-                        alt={currentMovie.title}
-                    />
+                <div className="poster" onClick={selectMovie.bind(this, currentMovie.id)}>
+                    <Link to={'/movies/' + currentMovie.id} className="movie-name-link">
+                        <h3 className="movie-name">{currentMovie.title}</h3>
+                        <img 
+                            className="poster-img" 
+                            src={currentMovie.posterUrl} 
+                            alt={currentMovie.title}
+                        />
+                    </Link>
                 </div>
                 <div className="count-likes">{currentMovie.likes}</div>
                 <Stars 

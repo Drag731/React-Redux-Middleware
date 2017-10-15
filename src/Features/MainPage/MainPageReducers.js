@@ -50,7 +50,9 @@ const MoviesReducer = (state = initialState, action) => {
         case ADD_NEW_MOVIE: {
             return {
                 ...state,
-                data: [...state.data, action.payload]
+                data: [...state.data, action.payload],
+                selectedMovieId: action.payload.id,
+                isFetching: true
             }
         }
 

@@ -18,7 +18,7 @@ export const fetchMovies = () => {
     };
 };
 
-const findAll = () => ({
+export const findAll = () => ({
     type: FIND_ALL
 });
 
@@ -53,6 +53,7 @@ const _deleteMovie = id => ({
 
 export const addNewMovie = data => {
     return (dispatch) => {
+        dispatch(findAll());
         return axios.post(`http://localhost:3001/movies/`, data)
             .then(response => dispatch(_addNewMoviee(data)))
     }

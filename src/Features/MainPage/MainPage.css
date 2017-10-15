@@ -3,11 +3,9 @@
 }
 
 #root {
-    width: 60%;
+    max-width: 960px;
     margin: 0 auto;
 }
-
-
 
 .movies {  
     text-align: center;

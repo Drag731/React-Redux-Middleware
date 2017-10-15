@@ -7,12 +7,17 @@ import './Form.css'
 import { setFormData } from './FormActions'
 import { getFormData } from './FormReducers'
 
-import { addNewMovie  } from '../../Features/MainPage/MainPageActions.js'
-import { getData } from '../../Features/MainPage/MainPageReducers.js'
+import { addNewMovie, fetchMovies } from '../../Features/MainPage/MainPageActions.js'
+import { getData, getisFetching } from '../../Features/MainPage/MainPageReducers.js'
 
 class CreateMovieForm extends Component {
 
     componentDidMount () {
+
+        if (this.props.isFetching) {
+            this.props.router.push('/movies');
+        }
+
         this.props.setFormData (
             {
                 id: '',
@@ -29,22 +34,23 @@ class CreateMovieForm extends Component {
     handleChange = e => this.props.setFormData({ [e.target.name]: e.target.value })
 
     onSubmit = () => {
-
+        const { getFormData, addNewMovie } = this.props;
         const newData = {
-            title: this.props.getFormData.title,
-            posterUrl: this.props.getFormData.posterUrl,
-            director: this.props.getFormData.director,
-            actors: this.props.getFormData.actors.split(', '),
-            genres: this.props.getFormData.genres.split(', '),
-            description: this.props.getFormData.description,
+            title: getFormData.title,
+            posterUrl: getFormData.posterUrl,
+            director: getFormData.director,
+            actors: getFormData.actors.split(', '),
+            genres: getFormData.genres.split(', '),
+            description: getFormData.description,
             likes: 0,
             stars: 0
-        }
-        this.props.addNewMovie(newData);
-        // this.props.router.push('/movies');
+        };
+        addNewMovie(newData);
     }
 
     render() {
+        const { getFormData } = this.props;
+
         return (
             <div>
                 <div className="header-create-film">Create New Film</div>
@@ -61,7 +67,7 @@ class CreateMovieForm extends Component {
                                         type="text" 
                                         name='title' 
                                         onChange={this.handleChange} 
-                                        value={this.props.getFormData.title} 
+                                        value={getFormData.title} 
                                     />
                                 </td>
                             </tr>
@@ -74,7 +80,7 @@ class CreateMovieForm extends Component {
                                         type="text" 
                                         name='posterUrl' 
                                         onChange={this.handleChange}
-                                        value={this.props.getFormData.posterUrl} 
+                                        value={getFormData.posterUrl} 
                                     />
                                 </td>
                             </tr>
@@ -87,7 +93,7 @@ class CreateMovieForm extends Component {
                                         type="text" 
                                         name='director' 
                                         onChange={this.handleChange} 
-                                        value={this.props.getFormData.director}
+                                        value={getFormData.director}
                                     />
                                 </td>
                             </tr>
@@ -100,7 +106,7 @@ class CreateMovieForm extends Component {
                                         type="text" 
                                         name='actors' 
                                         onChange={this.handleChange} 
-                                        value={this.props.getFormData.actors} 
+                                        value={getFormData.actors} 
                                         placeholder="John Doe, Jane Doe"
                                     />
                                 </td>
@@ -114,7 +120,7 @@ class CreateMovieForm extends Component {
                                         type="text" 
                                         name='genres' 
                                         onChange={this.handleChange} 
-                                        value={this.props.getFormData.genres} 
+                                        value={getFormData.genres} 
                                         placeholder="Comedy, drama"
                                     />
                                 </td>
@@ -129,7 +135,7 @@ class CreateMovieForm extends Component {
                                         cols='70' 
                                         name='description' 
                                         onChange={this.handleChange} 
-                                        value={this.props.getFormData.description}
+                                        value={getFormData.description}
                                     />
                                 </td>
                             </tr>
@@ -153,11 +159,13 @@ class CreateMovieForm extends Component {
 const mapStateToProps = state => ({
     getData: getData(state),
     getFormData: getFormData(state),
+    isFetching: getisFetching(state)
 })
 
 const mapDispatchToProps = {
     addNewMovie: (data) => addNewMovie(data),
     setFormData: data => setFormData(data),
+    fetchMovies: () => fetchMovies()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateMovieForm);

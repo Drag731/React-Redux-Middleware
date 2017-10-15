@@ -19,6 +19,8 @@ class MainPage extends Component {
 
     componentDidMount() { this.props.fetchMovies() }
 
+
+
     search = (flagSearch) => { this.props.search(flagSearch) }
 
     handlerOfLikesAndStars = (data, id) => { this.props.updateMovie(data, id) }
@@ -26,9 +28,9 @@ class MainPage extends Component {
     deleteMovie = (id) => { this.props.deleteMovie(id) }
 
     render() {
-        const { movies, sortMovieByLikes, sortMovieByRating } = this.props;
+        const { movies, sortMovieByLikes, sortMovieByRating, params, data } = this.props;
         const activeMovie = movies.filter((el) => {
-            return el.id === parseInt(this.props.params.id, 10)[0] || this.props.data[0];
+            return el.id === parseInt(params.id, 10)[0] || data[0];
         });
 
         return (
@@ -58,6 +60,7 @@ class MainPage extends Component {
                 <Description
                     key={activeMovie.id} 
                     handlerOfLikesAndStars={this.handlerOfLikesAndStars}
+                    params={params}
                 />    
             </div>
         )

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { setFormData } from './FormActions'
 import { getFormData } from './FormReducers'
 
-import { updateMovie } from '../../Features/MainPage/MainPageActions.js'
+import { updateMovie, fetchMovies } from '../../Features/MainPage/MainPageActions.js'
 import { getData, getSelectedMovie, getisFetching } from '../../Features/MainPage/MainPageReducers.js'
 
 class EditMovieForm extends Component {
@@ -46,25 +46,25 @@ class EditMovieForm extends Component {
     }
 
     onSubmit = () => {
-
+        const { getFormData, updateMovie } = this.props;
         const newData = {
-            id: this.props.getFormData.id,
-            title: this.props.getFormData.title,
-            posterUrl: this.props.getFormData.posterUrl,
-            director: this.props.getFormData.director,
-            actors: this.props.getFormData.actors.split(', '),
-            genres: this.props.getFormData.genres.split(', '),
-            description: this.props.getFormData.description,
-            likes: this.props.getFormData.likes,
-            stars: this.props.getFormData.stars
+            id: getFormData.id,
+            title: getFormData.title,
+            posterUrl: getFormData.posterUrl,
+            director: getFormData.director,
+            actors: getFormData.actors.split(', '),
+            genres: getFormData.genres.split(', '),
+            description: getFormData.description,
+            likes: getFormData.likes,
+            stars: getFormData.stars
         }
-
-        this.props.updateMovie(newData, newData.id);
-        // this.props.router.push('/movies/' + newData.id);
+        updateMovie(newData, newData.id);
     }
   
 
     render() {
+        const { getFormData } = this.props;
+
         return (
             <div>
                 <div className="header-edit-film">Edit Film</div>
@@ -81,7 +81,7 @@ class EditMovieForm extends Component {
                                         type="text" 
                                         name='title' 
                                         onChange={this.handleChange} 
-                                        value={this.props.getFormData.title} 
+                                        value={getFormData.title} 
                                     />
                                 </td>
                             </tr>
@@ -94,7 +94,7 @@ class EditMovieForm extends Component {
                                         type="text" 
                                         name='posterUrl' 
                                         onChange={this.handleChange} 
-                                        value={this.props.getFormData.posterUrl} 
+                                        value={getFormData.posterUrl} 
                                     />
                                 </td>
                             </tr>
@@ -107,7 +107,7 @@ class EditMovieForm extends Component {
                                         type="text" 
                                         name='director' 
                                         onChange={this.handleChange} 
-                                        value={this.props.getFormData.director}
+                                        value={getFormData.director}
                                     />
                                 </td>
                             </tr>
@@ -120,7 +120,7 @@ class EditMovieForm extends Component {
                                         type="text" 
                                         name='actors' 
                                         onChange={this.handleChange} 
-                                        value={this.props.getFormData.actors} 
+                                        value={getFormData.actors} 
                                     />
                                 </td>
                             </tr>
@@ -133,7 +133,7 @@ class EditMovieForm extends Component {
                                         type="text" 
                                         name='genres' 
                                         onChange={this.handleChange}
-                                        value={this.props.getFormData.genres} 
+                                        value={getFormData.genres} 
                                     />
                                 </td>
                             </tr>
@@ -147,14 +147,16 @@ class EditMovieForm extends Component {
                                         cols='70' 
                                         name='description' 
                                         onChange={this.handleChange} 
-                                        value={this.props.getFormData.description} 
+                                        value={getFormData.description} 
                                     />
                                 </td>
                             </tr>
                             <tr>
                                 <td />
                                 <td>
-                                    <button onClick={this.onSubmit}>SUBMIT</button>
+                                    <Link to={'/movies'}>
+                                        <button onClick={this.onSubmit}>SUBMIT</button>
+                                    </Link>
                                     <Link to={'/movies'}>
                                         <button>GO BACK</button>
                                     </Link>
@@ -177,7 +179,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     updateMovie: (data, id) => updateMovie(data, id),
-    setFormData: data => setFormData(data)
+    setFormData: data => setFormData(data),
+    fetchMovies: () => fetchMovies()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditMovieForm);
